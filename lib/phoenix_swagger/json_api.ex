@@ -152,9 +152,13 @@ defmodule PhoenixSwagger.JsonApi do
             id: %Schema{type: :string, description: "The JSON-API resource ID"},
             relationships: %Schema{type: :object, properties: %{}},
             links: %Schema{type: :object, properties: %{}},
-            attributes: %Schema{
-              type: :object,
-              properties: %{}
+            data: %{
+              properties: %{
+                attributes: %Schema{
+                  type: :object,
+                  properties: %{}
+                }
+              }
             }
           }
         }
@@ -230,16 +234,16 @@ defmodule PhoenixSwagger.JsonApi do
   def attribute(model = %Schema{}, name, type = %Schema{}, description, opts) do
     {required?, opts} = Keyword.pop(opts, :required)
     attr_schema = struct!(type, [description: description] ++ opts)
-    model = put_in(model.properties.attributes.properties[name], attr_schema)
+    model = put_in(model.properties.data.properties.attributes.properties[name], attr_schema)
 
     required =
-      case {model.properties.attributes.required, required?} do
+      case {model.properties.data.properties.attributes.required, required?} do
         {nil, true} -> [name]
         {r, true} -> r ++ [name]
         {r, _} -> r
       end
 
-    put_in(model.properties.attributes.required, required)
+    put_in(model.properties.data.properties.attributes.required, required)
   end
 
   @doc """

@@ -136,32 +136,36 @@ defmodule PhoenixSwagger.JsonApiTest do
              "properties" => %{
                "id" => %{"description" => "The JSON-API resource ID", "type" => "string"},
                "type" => %{"description" => "The JSON-API resource type", "type" => "string"},
-               "attributes" => %{
-                 "type" => "object",
+               "data" => %{
                  "properties" => %{
-                   "address" => %{
-                     "$ref" => "#/definitions/Address",
-                     "description" => "Users address"
-                   },
-                   "birthday" => %{
-                     "description" => "Birthday in YYYY-MM-DD format",
-                     "type" => "string"
-                   },
-                   "email" => %{"description" => "Email", "type" => "string"},
-                   "full_name" => %{"description" => "Full name", "type" => "string"},
-                   "gender" => %{"description" => "Gender", "type" => ["string", "null"]},
-                   "phone" => %{"description" => "Users phone number", "type" => "string"},
-                   "user_created_at" => %{
-                     "description" => "First created timestamp UTC",
-                     "type" => "string"
-                   },
-                   "user_updated_at" => %{
-                     "description" => "Last update timestamp UTC",
-                     "type" => "string",
-                     "format" => "ISO-8601"
+                   "attributes" => %{
+                     "type" => "object",
+                     "properties" => %{
+                       "address" => %{
+                         "$ref" => "#/definitions/Address",
+                         "description" => "Users address"
+                       },
+                       "birthday" => %{
+                         "description" => "Birthday in YYYY-MM-DD format",
+                         "type" => "string"
+                       },
+                       "email" => %{"description" => "Email", "type" => "string"},
+                       "full_name" => %{"description" => "Full name", "type" => "string"},
+                       "gender" => %{"description" => "Gender", "type" => ["string", "null"]},
+                       "phone" => %{"description" => "Users phone number", "type" => "string"},
+                       "user_created_at" => %{
+                         "description" => "First created timestamp UTC",
+                         "type" => "string"
+                       },
+                       "user_updated_at" => %{
+                         "description" => "Last update timestamp UTC",
+                         "type" => "string",
+                         "format" => "ISO-8601"
+                       }
+                     },
+                     "required" => ["email"]
                    }
-                 },
-                 "required" => ["email"]
+                 }
                },
                "links" => %{
                  "type" => "object",
