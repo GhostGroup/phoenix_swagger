@@ -148,12 +148,12 @@ defmodule PhoenixSwagger.JsonApi do
         %Schema{
           type: :object,
           properties: %{
-            type: %Schema{type: :string, description: "The JSON-API resource type"},
-            id: %Schema{type: :string, description: "The JSON-API resource ID"},
-            relationships: %Schema{type: :object, properties: %{}},
-            links: %Schema{type: :object, properties: %{}},
             data: %{
               properties: %{
+                type: %Schema{type: :string, description: "The JSON-API resource type"},
+                id: %Schema{type: :string, description: "The JSON-API resource ID"},
+                relationships: %Schema{type: :object, properties: %{}},
+                links: %Schema{type: :object, properties: %{}},
                 attributes: %Schema{
                   type: :object,
                   properties: %{}
@@ -251,7 +251,7 @@ defmodule PhoenixSwagger.JsonApi do
   """
   def link(model = %Schema{}, name, description) do
     put_in(
-      model.properties.links.properties[name],
+      model.properties.data.properties.links.properties[name],
       %Schema{type: :string, description: description}
     )
   end
@@ -268,7 +268,7 @@ defmodule PhoenixSwagger.JsonApi do
   def relationship(model = %Schema{}, name, opts \\ []) do
     type = opts[:type] || :has_one
 
-    put_in(model.properties.relationships.properties[name], %Schema{
+    put_in(model.properties.data.properties.relationships.properties[name], %Schema{
       type: :object,
       properties: %{
         links: %Schema{

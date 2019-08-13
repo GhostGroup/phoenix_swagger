@@ -134,10 +134,10 @@ defmodule PhoenixSwagger.JsonApiTest do
              "description" => "A user that may have one or more supporter pages.",
              "type" => "object",
              "properties" => %{
-               "id" => %{"description" => "The JSON-API resource ID", "type" => "string"},
-               "type" => %{"description" => "The JSON-API resource type", "type" => "string"},
                "data" => %{
                  "properties" => %{
+                   "id" => %{"description" => "The JSON-API resource ID", "type" => "string"},
+                   "type" => %{"description" => "The JSON-API resource type", "type" => "string"},
                    "attributes" => %{
                      "type" => "object",
                      "properties" => %{
@@ -164,47 +164,47 @@ defmodule PhoenixSwagger.JsonApiTest do
                        }
                      },
                      "required" => ["email"]
-                   }
-                 }
-               },
-               "links" => %{
-                 "type" => "object",
-                 "properties" => %{
-                   "self" => %{
-                     "description" => "The link to this user resource",
-                     "type" => "string"
-                   }
-                 }
-               },
-               "relationships" => %{
-                 "type" => "object",
-                 "properties" => %{
-                   "posts" => %{
+                   },
+                   "links" => %{
                      "type" => "object",
                      "properties" => %{
-                       "data" => %{
+                       "self" => %{
+                         "description" => "The link to this user resource",
+                         "type" => "string"
+                       }
+                     }
+                   },
+                   "relationships" => %{
+                     "type" => "object",
+                     "properties" => %{
+                       "posts" => %{
                          "type" => "object",
                          "properties" => %{
-                           "id" => %{
-                             "description" => "Related posts resource id",
-                             "type" => "string"
+                           "data" => %{
+                             "type" => "object",
+                             "properties" => %{
+                               "id" => %{
+                                 "description" => "Related posts resource id",
+                                 "type" => "string"
+                               },
+                               "type" => %{
+                                 "description" => "Type of related posts resource",
+                                 "type" => "string"
+                               }
+                             }
                            },
-                           "type" => %{
-                             "description" => "Type of related posts resource",
-                             "type" => "string"
-                           }
-                         }
-                       },
-                       "links" => %{
-                         "type" => "object",
-                         "properties" => %{
-                           "related" => %{
-                             "description" => "Related posts link",
-                             "type" => "string"
-                           },
-                           "self" => %{
-                             "description" => "Relationship link for posts",
-                             "type" => "string"
+                           "links" => %{
+                             "type" => "object",
+                             "properties" => %{
+                               "related" => %{
+                                 "description" => "Related posts link",
+                                 "type" => "string"
+                               },
+                               "self" => %{
+                                 "description" => "Relationship link for posts",
+                                 "type" => "string"
+                               }
+                             }
                            }
                          }
                        }
@@ -236,8 +236,8 @@ defmodule PhoenixSwagger.JsonApiTest do
         relationship(:posts, type: :has_many)
       end
 
-    assert user_resource_schema["properties"]["relationships"]["properties"]["posts"][
-             "properties"
-           ]["data"]["type"] == "array"
+    assert user_resource_schema["properties"]["data"]["properties"]["relationships"]["properties"][
+             "posts"
+           ]["properties"]["data"]["type"] == "array"
   end
 end
