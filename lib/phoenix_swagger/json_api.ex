@@ -158,7 +158,8 @@ defmodule PhoenixSwagger.JsonApi do
                   type: :object,
                   properties: %{}
                 }
-              }
+              },
+              type: :object
             }
           }
         }

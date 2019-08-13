@@ -210,7 +210,8 @@ defmodule PhoenixSwagger.JsonApiTest do
                        }
                      }
                    }
-                 }
+                 },
+                 "type" => "object"
                }
              }
            }
